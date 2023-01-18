@@ -1,7 +1,7 @@
-name: dqc-env
-channels:
-  - conda-forge
-  - defaults
+#name: dqc-env
+#channels:
+ # - conda-forge
+ # - defaults
 dependencies:
  - pip
  - numpy
