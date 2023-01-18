@@ -65,7 +65,7 @@ jobs:
     - name: Test Install
       run: |
         conda init bash
-        conda activate dqc-env
+        conda activate base
         python -c 'import deepchem; print("DeepChem version %s" % deepchem.__version__)'
         python -c 'import torch; print("Torch version %s" % torch.__version__)'
         python -c 'import dqc; print("DQC version" % dqc.__version__)'
