@@ -1290,6 +1290,7 @@ class XCLoss(Loss):
     Kasim, Muhammad F., and Sam M. Vinko. "Learning the exchange-correlation
     functional from nature with fully differentiable density functional
     theory." Physical Review Letters 127.12 (2021): 126403.
+
     https://github.com/deepchem/deepchem/blob/0bc3139bb99ae7700ba2325a6756e33b6c327842/deepchem/models/dft/dftxc.py
     """
 

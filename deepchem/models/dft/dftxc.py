@@ -2,7 +2,7 @@
 from deepchem.models.dft.scf import XCNNSCF
 import torch
 from deepchem.models.dft.nnxc import HybridXC
-from deepchem.models.losses import Loss, L2Loss, XCLoss
+from deepchem.models.losses import Loss, XCLoss
 from deepchem.models.torch_models.torch_model import TorchModel
 from typing import Tuple, Optional, List, Any
 import numpy as np
