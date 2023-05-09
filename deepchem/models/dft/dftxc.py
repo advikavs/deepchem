@@ -2,7 +2,7 @@
 from deepchem.models.dft.scf import XCNNSCF
 import torch
 from deepchem.models.dft.nnxc import HybridXC
-from deepchem.models.losses import Loss, L2Loss
+from deepchem.models.losses import Loss, L2Loss, XCLoss
 from deepchem.models.torch_models.torch_model import TorchModel
 from typing import Tuple, Optional, List, Any
 import numpy as np
@@ -154,14 +154,13 @@ class XCModel(TorchModel):
                                           modeltype).to(torch.double)
         model = (DFTXC(xcstr, nnmodel)).to(device)
         self.xc = xcstr
-        loss: Loss = L2Loss()
+        loss = XCLoss()
         output_types = ['loss', 'predict']
         self.mode = mode
         super(XCModel, self).__init__(model,
                                       loss=loss,
                                       output_types=output_types,
                                       **kwargs)
-
     def _prepare_batch(
             self,
             batch) -> Tuple[List[Any], List[torch.Tensor], List[torch.Tensor]]:
@@ -200,7 +199,6 @@ class XCModel(TorchModel):
             ]
         else:
             weight_tensors = []
-
         return (inputs, label_tensors, weight_tensors)
 
 

@@ -1262,7 +1262,7 @@ class GraphContextPredLoss(Loss):
         return loss
 
 
-class DensityProfileLoss(Loss):
+class XCLoss(Loss):
     """
     Loss for the density profile entry type for Quantum Chemistry calculations.
     It is an integration of the squared difference between ground truth and calculated
@@ -1293,7 +1293,7 @@ class DensityProfileLoss(Loss):
     https://github.com/deepchem/deepchem/blob/0bc3139bb99ae7700ba2325a6756e33b6c327842/deepchem/models/dft/dftxc.py
     """
 
-    def _create_pytorch_loss(self, volume):
+    def _create_pytorch_loss(self):
         """
         Parameters
         ----------
@@ -1302,10 +1302,13 @@ class DensityProfileLoss(Loss):
         """
         import torch
 
-        def loss(output, labels):
+        def loss(output, labels, volume):
             output, labels = _make_pytorch_shapes_consistent(output, labels)
-            return torch.sum((labels - output)**2 * volume)
-
+            if output.shape[0] > 1 and len(output.shape) == 1:
+                return torch.sum((labels - output)**2 * volume)
+            else:
+                loss = L2Loss()._create_pytorch_loss()(output, labels)
+                return loss 
         return loss
 
 
